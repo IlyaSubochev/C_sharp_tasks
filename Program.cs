@@ -13,16 +13,15 @@ namespace FirstApp
         {
             string[] a ={"a","b","c","d","e","f"," ","g","j","h","i","k","l","m","n","o","p"," ","q","r",
                       "s","t","u","v","w"," ","x","y","z"," "};
+            StringBuilder sb = new StringBuilder(r);
             Random New = new Random();
             int y = 0;
-
-            string f = "";
             for (int i = 0; i < r; i++)
             {
                 y = New.Next(0, a.Length - 1);
-                f = f + a[y];
+                sb.Append(a[y]);
             }
-            return f;
+            return sb.ToString();
         }
         static bool findS(string s1, string s2, int k = 0, bool c = true)
         {
@@ -92,17 +91,15 @@ namespace FirstApp
         {
             try
             {
-                string s1 = RndString(400000);
+                string s1 = RndString(1000000);
                 Thread.Sleep(100);
                 string s2 = RndString(100);
                 findS(s1, s2);
                 if (findS(s1,s2)==true) Console.WriteLine("TEST 4 PASSED");
-                else Console.WriteLine("TEST 4 ERRORvvvvv");
+                else Console.WriteLine("TEST 4 ERROR");
             }
-            catch (Exception) { Console.WriteLine("TEST 4 ERROR"); }
+            catch (Exception) { Console.WriteLine("TEST 4 ERROR exception"); }
         }
-
-
         static void Main(string[] args)
         {
             Console.WriteLine("Вызываем test1 ");
