@@ -78,7 +78,7 @@ namespace AlgorithmsDataStructures
                             head = null;
                             tail=null;
                             }
-                           else if (nodePrev == null  )
+                           else if (nodePrev == null && this.Count() > 2   )
                            { 
                             head = node;
                             tail = node.next;
