@@ -59,6 +59,7 @@ namespace AlgorithmsDataStructures
         {
             Node node = head;
             Node nodePrev = null;
+            int CountRem = Count();
             while (node != null)
             {
                 if (node.value == _value)
@@ -78,12 +79,12 @@ namespace AlgorithmsDataStructures
                             head = null;
                             tail=null;
                             }
-                           else if (nodePrev == null && this.Count() > 2   )
+                           else if (nodePrev == null && CountRem > 2 )
                            { 
                             head = node;
                             tail = node.next;
                            }
-                           else if (nodePrev == null && this.Count() == 2 )
+                           else if (nodePrev == null && CountRem == 2 )
                            { 
                             head = node;
                             tail = head;
