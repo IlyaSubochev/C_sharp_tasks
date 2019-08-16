@@ -80,10 +80,7 @@ namespace AlgorithmsDataStructures
                             tail=null;
                             }
                            else if (nodePrev == null && CountRem > 2 )
-                           { 
-                            head = node;
-                            tail = node.next;
-                           }
+                                head = node;                         
                            else if (nodePrev == null && CountRem == 2 )
                            { 
                             head = node;
