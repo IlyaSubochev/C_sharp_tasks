@@ -75,13 +75,13 @@ namespace AlgorithmsDataStructures
                         node = node.next;
                         if (node == null)
                             { 
-                             head = null;
-                             tail=null;
+                            head = null;
+                            tail=null;
                             }
-                           else if (nodePrev == null )
+                           else if (nodePrev == null  )
                            { 
                             head = node;
-                            tail=node.next;
+                            tail = head;
                            }
                     }
                     return true;
