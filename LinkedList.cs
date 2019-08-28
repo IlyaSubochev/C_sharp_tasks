@@ -80,10 +80,7 @@ namespace AlgorithmsDataStructures
                             tail = null;
                         }
                         else if (nodePrev == null && CountRem > 2)
-                        {
                             head = node;
-                            tail = node.next;
-                        }
                         else if (nodePrev == null && CountRem == 2)
                         {
                             head = node;
@@ -144,7 +141,6 @@ namespace AlgorithmsDataStructures
                 {
                     if (node.value == _nodeAfter.value && node.next != null)
                     {
-
                         _nodeToInsert.next = node.next;
                         node.next = _nodeToInsert;                        
                         break;
@@ -154,8 +150,6 @@ namespace AlgorithmsDataStructures
                     node = node.next;
                 }
             }
-        }
-        
+        }        
     }
-
 }
