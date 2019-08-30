@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Test
 {
-    class TestClass
+    public class TestClass
     {
         public static void TestRemove()
         {
@@ -110,6 +110,8 @@ namespace Test
             else
                 Console.WriteLine("TestInserAfter part2 ERROR");
         }
+        public static void TestFindAll()
+        { }
         public static List<int> AddMerge(List<int> list1, List<int> list2)
         {
             List<int> ListAddMerge = new List<int>();
