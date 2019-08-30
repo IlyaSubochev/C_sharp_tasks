@@ -111,7 +111,47 @@ namespace Test
                 Console.WriteLine("TestInserAfter part2 ERROR");
         }
         public static void TestFindAll()
-        { }
+        {
+            List<AlgorithmsDataStructures.Node> nodes1 = new List<AlgorithmsDataStructures.Node>();
+            var list = new AlgorithmsDataStructures.LinkedList();
+            list.AddInTail(new AlgorithmsDataStructures.Node(5));
+            list.AddInTail(new AlgorithmsDataStructures.Node(5));
+            list.AddInTail(new AlgorithmsDataStructures.Node(15));
+            list.AddInTail(new AlgorithmsDataStructures.Node(25));
+            nodes1 = list.FindAll(5);
+            int i = NodeFor(nodes1, 0);
+            if (i == 2)
+                Console.WriteLine("TestFindAll part1 PASSED");
+            else
+                Console.WriteLine("TestFindAll part1 ERROR");
+            nodes1.Clear();
+            nodes1 = list.FindAll(51);
+            i = NodeFor(nodes1, 0);           
+            if (i == 0)
+                Console.WriteLine("TestFindAll part2 PASSED");
+            else
+                Console.WriteLine("TestFindAll part2 ERROR");
+            list.Clear();
+            nodes1.Clear();
+            nodes1 = list.FindAll(1);
+            i = NodeFor(nodes1, 0);
+            if (i == 0)
+                Console.WriteLine("TestFindAll part3 PASSED");
+            else
+                Console.WriteLine("TestFindAll part3 ERROR");
+
+        }
+
+        private static int NodeFor(List<AlgorithmsDataStructures.Node> nodes1, int i)
+        {
+            foreach (var item in nodes1)
+            {
+                if (item != null)
+                    i++;
+            }
+            return i;
+        }
+
         public static List<int> AddMerge(List<int> list1, List<int> list2)
         {
             List<int> ListAddMerge = new List<int>();
@@ -132,6 +172,7 @@ namespace Test
             }
             return ListAddMerge;
         }
+        
 
     }
 }
