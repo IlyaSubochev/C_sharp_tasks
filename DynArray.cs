@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+
+namespace AlgorithmsDataStructures
+{
+
+    public class DynArray<T>
+    {
+        public T[] array;
+        public int count;
+        public int capacity;
+
+        public DynArray()
+        {
+            count = 0;
+            MakeArray(16);
+        }
+        public void MakeArray(int new_capacity)
+        {
+            if (array != null)
+                capacity = array.Length;
+            else
+                capacity = 16;
+            if (new_capacity <= 16)
+                capacity = 16;
+            else if (capacity < new_capacity)
+            {
+                while (capacity < new_capacity)
+                    capacity = capacity * 2;
+            }
+            else
+                capacity = new_capacity;
+            if (array != null)
+            {
+                T[] NewArray = new T[capacity];
+                array.CopyTo(NewArray, 0);
+                array = NewArray;
+            }
+            else
+                array = new T[capacity];
+
+        }
+        public T GetItem(int index)
+        {
+            if (index < count)
+                return array[index];
+            else
+                throw new IndexOutOfRangeException();
+        }
+        public void Append(T itm)
+        {
+            if (capacity == count)
+            {
+                MakeArray(capacity*2);
+            }
+            array[count] = itm;
+            count++;
+        }
+
+        public void Insert(T itm, int index)
+        {
+            if (count == array.Length)
+            {
+               Append(itm);
+            }
+            else if (index < count)
+            {
+                Array.Copy(array, index, array, index + 1, count - index);
+                array[index] = itm;
+                count++;
+            }
+            else
+                throw new IndexOutOfRangeException();
+        }
+
+        public void Remove(int index)
+        {
+            if (index < count)
+            {               
+                Array.Copy(array, index+1, array, index, count - index+1);          
+                count--;
+                if (count < capacity && capacity > 16)
+                    MakeArray(capacity * 3 / 2);
+            }
+             else if (index > count)
+                throw new IndexOutOfRangeException();
+                    
+        }
+
+    }
+}
