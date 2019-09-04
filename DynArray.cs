@@ -33,7 +33,7 @@ namespace AlgorithmsDataStructures
             if (array != null)
             {
                 T[] NewArray = new T[capacity];
-                array.CopyTo(NewArray, 0);
+                Array.Copy(array, 0, NewArray, 0, count);
                 array = NewArray;
             }
             else
@@ -59,7 +59,7 @@ namespace AlgorithmsDataStructures
 
         public void Insert(T itm, int index)
         {
-            if (count == array.Length)
+            if (count == index || count==0)
             {
                Append(itm);
             }
@@ -71,6 +71,9 @@ namespace AlgorithmsDataStructures
             }
             else
                 throw new IndexOutOfRangeException();
+            if (count == capacity)
+                MakeArray(capacity * 2);
+
         }
 
         public void Remove(int index)
@@ -79,11 +82,11 @@ namespace AlgorithmsDataStructures
             {               
                 Array.Copy(array, index+1, array, index, count - index+1);          
                 count--;
-                if (count < capacity && capacity > 16)
-                    MakeArray(capacity * 3 / 2);
+                if ((count * 100 / capacity) < 50 && capacity > 16)
+                    MakeArray(capacity * 2 / 3);
             }
-             else if (index > count)
-                throw new IndexOutOfRangeException();
+             else if (index > count || count == 0)
+                 throw new IndexOutOfRangeException();
                     
         }
 
