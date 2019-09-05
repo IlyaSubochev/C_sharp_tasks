@@ -15,6 +15,7 @@ namespace AlgorithmsDataStructures
             count = 0;
             MakeArray(16);
         }
+
         public void MakeArray(int new_capacity)
         {
             if (array != null)
@@ -40,6 +41,7 @@ namespace AlgorithmsDataStructures
                 array = new T[capacity];
 
         }
+
         public T GetItem(int index)
         {
             if (index < count)
@@ -47,6 +49,7 @@ namespace AlgorithmsDataStructures
             else
                 throw new IndexOutOfRangeException();
         }
+
         public void Append(T itm)
         {
             if (capacity == count)
@@ -65,22 +68,24 @@ namespace AlgorithmsDataStructures
             }
             else if (index < count)
             {
+                if (count == capacity)
+                    MakeArray(capacity * 2);
                 Array.Copy(array, index, array, index + 1, count - index);
                 array[index] = itm;
                 count++;
             }
             else
-                throw new IndexOutOfRangeException();
-            if (count == capacity)
-                MakeArray(capacity * 2);
-
+                throw new IndexOutOfRangeException();           
         }
 
         public void Remove(int index)
         {
             if (index < count)
-            {               
-                Array.Copy(array, index+1, array, index, count - index+1);          
+            {
+                T[] NewArray = new T[capacity];
+                Array.Copy(array, 0, NewArray, 0, index);                
+                Array.Copy(array, index+1, NewArray, index, count - index-1);
+                array = NewArray;
                 count--;
                 if ((count * 100 / capacity) < 50 && capacity > 16)
                     MakeArray(capacity * 2 / 3);
