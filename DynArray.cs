@@ -59,7 +59,7 @@ namespace AlgorithmsDataStructures
 
         public void Insert(T itm, int index)
         {
-            if (count-1 == index || count==0 || count == index)
+            if (count == index )
             {
                Append(itm);
             }
