@@ -59,7 +59,7 @@ namespace AlgorithmsDataStructures
 
         public void Insert(T itm, int index)
         {
-            if (count-1 == index || count==0)
+            if (count-1 == index || count==0 || count == index)
             {
                Append(itm);
             }
@@ -85,7 +85,7 @@ namespace AlgorithmsDataStructures
                 if ((count * 100 / capacity) < 50 && capacity > 16)
                     MakeArray(capacity * 2 / 3);
             }
-             else if (index > count || count == 0)
+             else if (index >= count || count == 0)
                  throw new IndexOutOfRangeException();
                     
         }
