@@ -1,4 +1,4 @@
-        public static bool Balanced(string s)
+               public static bool Balanced(string s)
         {
             var BalStack = new Stack<char>();
             for (int i = 0; i < s.Length; i++)
@@ -15,11 +15,12 @@
                     }
                 }
             }
-            if ( BalStack.Count() == 0 && s.Length%2 == 0) 
+            if ( BalStack.Count() == 0 && s.Length % 2 == 0) 
                 return true;
             else
                 return false;
         }
+
         public static int PostFix(string s)
         {
             var S1 = new Stack<int>();
