@@ -1,4 +1,4 @@
-  public static bool Balanced(string s)
+        public static bool Balanced(string s)
         {
             var BalStack = new Stack<char>();
             int k = 0;
@@ -14,13 +14,10 @@
                     if (BalStack.Count() != 0 && BalStack.Peek() == '(')
                     {
                         BalStack.Pop();
-                        k--;
                     }
-                    else
-                        k--;
                 }
             }
-            if ( BalStack.Count() == 0 && k == 0)
+            if ( BalStack.Count() == 0 && s.Length % 2 == 0) 
                 return true;
             else
                 return false;
