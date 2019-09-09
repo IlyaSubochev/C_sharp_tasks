@@ -1,13 +1,11 @@
         public static bool Balanced(string s)
         {
             var BalStack = new Stack<char>();
-            int k = 0;
             for (int i = 0; i < s.Length; i++)
             {
                 if (s[i] == '(')
                 {
                     BalStack.Push(s[i]);
-                    k++;
                 }
                 else if (s[i] == ')') 
                 {
@@ -17,7 +15,7 @@
                     }
                 }
             }
-            if ( BalStack.Count() == 0 && s.Length % 2 == 0) 
+            if ( BalStack.Count() == 0 && s.Length%2 == 0) 
                 return true;
             else
                 return false;
