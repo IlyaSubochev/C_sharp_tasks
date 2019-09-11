@@ -48,21 +48,19 @@ namespace AlgorithmsDataStructures
                 return default(T);
             }
 
-            T value = array[tail];
+            T value = array[head];
 
-            if (tail == 0)
+            if (head == array.Length - 1)
             {
-               
-                tail = array.Length - 1;
+
+                head = 0;
             }
             else
             {
-                
-                tail--;
-            }
-            
-            size--;
-            array[size] = default(T);
+                array[head] = default(T);
+                head++;
+                size--;
+            }            
             return value;
 
           
