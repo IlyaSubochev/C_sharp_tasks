@@ -23,6 +23,8 @@ namespace AlgorithmsDataStructures
 
         public void Enqueue(T item)
         {
+            if (size == array.Length)
+                MakeArray(2 * capacity);
             if (tail == array.Length - 1)
             {
                 tail = 0;
@@ -62,7 +64,6 @@ namespace AlgorithmsDataStructures
                 size--;
             }            
             return value;
-
           
         }
 
