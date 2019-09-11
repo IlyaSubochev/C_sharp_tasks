@@ -60,9 +60,9 @@ namespace AlgorithmsDataStructures
                 
                 tail--;
             }
-
+            
             size--;
-
+            array[size] = default(T);
             return value;
 
           
