@@ -15,9 +15,7 @@ namespace AlgorithmsDataStructures
         public Queue()
         {
             MakeArray(16) ;
-            size = 0;
-            head = 0;
-            tail = -1;
+            size = 0;           
             capacity = 16;
         }
 
@@ -72,29 +70,26 @@ namespace AlgorithmsDataStructures
             return size;
         }
         public void MakeArray(int new_capacity)
-        {
-            if (array != null)
-                capacity = array.Length;
-            else
-                capacity = 16;
-            if (new_capacity <= 16)
-                capacity = 16;
-            else if (capacity < new_capacity)
+        {          
+            T[] NewArray = new T[new_capacity];
+            if (size > 0)
             {
-                while (capacity < new_capacity)
-                    capacity = capacity * 2;
+                if (head < tail)
+                {
+                    Array.Copy(array, head, NewArray, 0, size);
+                }
+                else
+                {
+                    Array.Copy(array, head, NewArray, 0, array.Length - head);
+                    Array.Copy(array, 0, NewArray, array.Length - head, tail+1);
+                }
             }
+            array = NewArray;
+            head = 0;
+            if (size == capacity)
+                tail = size-1;
             else
-                capacity = new_capacity;
-            if (array != null)
-            {
-                T[] NewArray = new T[capacity];
-                Array.Copy(array, 0, NewArray, 0, size);
-                array = NewArray;
-            }
-            else
-                array = new T[capacity];
-
+                tail = 0;
         }
 
     }
