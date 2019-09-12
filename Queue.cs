@@ -47,20 +47,10 @@ namespace AlgorithmsDataStructures
             {
                 return default(T);
             }
-
             T value = array[head];
-
-            if (head == array.Length - 1)
-            {
-
-                head = 0;
-            }
-            else
-            {
                 array[head] = default(T);
                 head++;
-                size--;
-            }            
+                size--;          
             return value;
           
         }
@@ -69,9 +59,10 @@ namespace AlgorithmsDataStructures
         {
             return size;
         }
+
         public void MakeArray(int new_capacity)
         {          
-            T[] NewArray = new T[new_capacity];
+            T[] NewArray = new T[new_capacity];           
             if (size > 0)
             {
                 if (head < tail)
@@ -90,8 +81,8 @@ namespace AlgorithmsDataStructures
                 tail = size-1;
             else
                 tail = 0;
+            capacity = new_capacity;
         }
-
     }
 }
 
