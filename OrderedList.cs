@@ -32,7 +32,7 @@ namespace AlgorithmsDataStructures
         public int Compare(T v1, T v2)
         {
             int result=0;
-            if (typeof(T) == typeof(String))  // версия для лексикографического сравнения строк
+            if (v1.GetType() == typeof(String))  // версия для лексикографического сравнения строк typeof(T)
             {
                 string v1String = v1.ToString().Trim();
                 string v2String = v2.ToString().Trim();
@@ -91,6 +91,11 @@ namespace AlgorithmsDataStructures
                         node = _value;
                         node.next = _value.next;
                         node.prev = _value.prev;
+                        break;
+                    }
+                    if (node.next == null && (Compare(node.value, value) > 0))
+                    {
+                        AddInTail(_value);
                         break;
                     }
                     node = node.next;
