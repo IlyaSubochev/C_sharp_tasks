@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlgorithmsDataStructuresO
+namespace AlgorithmsDataStructures
 {
 
     public class Node<T>
