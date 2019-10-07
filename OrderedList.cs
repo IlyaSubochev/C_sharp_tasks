@@ -70,12 +70,14 @@ namespace AlgorithmsDataStructures
                
                 while (node != null)
                 {
-                    if (node.next == null && (Compare(node.value, value) < 0 || Compare(node.value, value) == 0))
+                    int result = Compare(node.value, value);                    
+                    if (node.next == null && (result < 0 || result == 0))
                     { 
                         AddInTail(_value); 
                         break; 
                     }
-                    else if (node.next != null && Compare(node.value, value) == 0 && node.prev != null)
+                    else if (node.next != null && node.prev != null && 
+                        (result == 0 || (result<0 && Compare(node.next.value, value) > 0)) )
                     {
                         _value.next = node.next;
                         _value.prev = node;
@@ -83,7 +85,7 @@ namespace AlgorithmsDataStructures
                         node.next = _value;
                         break;
                     }
-                    else if (node.next != null && Compare(node.value, value) == 0 && node.prev == null)
+                    else if (node.next != null && node.prev == null && result == 0 )
                     {
                         _value.next = node.next;
                         _value.prev = node;
@@ -93,7 +95,14 @@ namespace AlgorithmsDataStructures
                         node.prev = _value.prev;
                         break;
                     }
-                    if (node.next == null && (Compare(node.value, value) > 0))
+                    else if (node.next != null && node.prev == null && result > 0)
+                    {
+                        head = _value;
+                        head.next = node;
+                        node.prev = head;
+                        break;
+                    }
+                    if (node.next == null && result < 0)
                     {
                         AddInTail(_value);
                         break;
@@ -108,12 +117,13 @@ namespace AlgorithmsDataStructures
 
                 while (node != null)
                 {
-                    if (node==null || (node.next == null &&  Compare(node.value, value) == 0))
+                    int result = Compare(node.value, value);
+                    if (node==null || (node.next == null && (result == 0 || result > 0)))
                     {
                         AddInTail(_value);
                         break;
                     }
-                    else if (node.prev == null && (Compare(node.value, value) < 0 || Compare(node.value, value) == 0))
+                    else if (node.prev == null && (result < 0 || result == 0))
                     {
                         Node<T> temp = head;
                         head = _value;
@@ -122,7 +132,8 @@ namespace AlgorithmsDataStructures
 
                         break;
                     }
-                    else if (node.next != null && Compare(node.value, value) == 0 && node.prev != null)
+                    else if (node.next != null && node.prev != null &&
+                        (result == 0 || (result > 0 && Compare(node.next.value, value) < 0)))
                     {
                         _value.next = node.next;
                         _value.prev = node;
@@ -139,11 +150,18 @@ namespace AlgorithmsDataStructures
         public Node<T> Find(T val)
         {
             Node<T> node = head;
-            while (node != null)
+            if (_ascending == true && (Compare(head.value, val) > 0 || Compare(tail.value, val) < 0))
+                return null;
+            else if (_ascending == false && (Compare(head.value, val) < 0 || Compare(tail.value, val) > 0))
+                return null;
+            else
             {
-                if (Compare(node.value, val) == 0)
-                    return node;
-                node = node.next;
+                while (node != null)
+                {
+                    if (Compare(node.value, val) == 0)
+                        return node;
+                    node = node.next;
+                }
             }
             return null;
             
