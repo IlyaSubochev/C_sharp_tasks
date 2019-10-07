@@ -95,7 +95,8 @@ namespace AlgorithmsDataStructures
                         node.prev = _value.prev;
                         break;
                     }
-                    else if (node.next != null && node.prev == null && result > 0)
+                    else if ((node.next != null && node.prev == null && result > 0) ||
+                        (node.next == null && node.prev == null && result > 0))
                     {
                         head = _value;
                         head.next = node;
