@@ -173,28 +173,30 @@ namespace AlgorithmsDataStructures
             Node<T> node = Find(val);
             if (node != null)
             {
-               
-                    if (node.prev == null)
-                    {
-                        node = node.next;
-                        head = node;
-                        head.prev = null;
-                    }
-                    else if (node.next == null)
-                    {
-                        if (Count() == 2)
-                            tail = head;
-                        else
-                            tail = node.prev;
-                        tail.next = null;
-                    }
+
+                if (Count() == 1)
+                    Clear(_ascending);
+                else if (node.prev == null)
+                {
+                    node = node.next;
+                    head = node;
+                    head.prev = null;
+                }
+                else if (node.next == null)
+                {
+                    if (Count() == 2)
+                        tail = head;
                     else
-                    {
-                        Node<T> temp = node.next;
-                        node.prev.next = temp;
-                        temp.prev = node.prev;
-                       
-                    }
+                        tail = node.prev;
+                    tail.next = null;
+                }
+                else
+                {
+                    Node<T> temp = node.next;
+                    node.prev.next = temp;
+                    temp.prev = node.prev;
+
+                }
               
             }
         }
