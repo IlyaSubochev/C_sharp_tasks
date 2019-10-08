@@ -77,7 +77,7 @@ namespace AlgorithmsDataStructures
                         break; 
                     }
                     else if (node.next != null && node.prev != null && 
-                        (result == 0 || (result<0 && Compare(node.next.value, value) > 0)) )
+                        (result == 0 || (result<0 && Compare(node.next.value, value) > 0))) 
                     {
                         _value.next = node.next;
                         _value.prev = node;
@@ -85,7 +85,8 @@ namespace AlgorithmsDataStructures
                         node.next = _value;
                         break;
                     }
-                    else if (node.next != null && node.prev == null && result == 0 )
+                    else if (node.next != null && node.prev == null &&
+                        (result == 0 || (result < 0 && Compare(node.next.value, value) > 0)))
                     {
                         _value.next = node.next;
                         _value.prev = node;
@@ -103,11 +104,7 @@ namespace AlgorithmsDataStructures
                         node.prev = head;
                         break;
                     }
-                    if (node.next == null && result < 0)
-                    {
-                        AddInTail(_value);
-                        break;
-                    }
+                   
                     node = node.next;
                 }
             }
@@ -142,7 +139,16 @@ namespace AlgorithmsDataStructures
                         node.next = _value;
                         break;
                     }
-                   
+                    else if (node.next != null && node.prev == null &&
+                        (result == 0 || (result > 0 && Compare(node.next.value, value) < 0)))
+                    {
+                        _value.next = node.next;
+                        _value.prev = node;
+                        node.next.prev = _value;
+                        node.next = _value;
+                        break;
+                    }
+
                     node = node.next;
                 }
             }           
