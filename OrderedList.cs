@@ -34,7 +34,7 @@ namespace AlgorithmsDataStructures
             int result=0;
             if (v1.GetType() == typeof(String))  // версия для лексикографического сравнения строк typeof(T)
             {
-                string v1String = v1.ToString().Trim();
+                string v1String = v1.ToString().Trim();                           
                 string v2String = v2.ToString().Trim();
                 if (v1String.CompareTo(v2String) < 0)
                     return result = -1;
@@ -71,12 +71,12 @@ namespace AlgorithmsDataStructures
                 while (node != null)
                 {
                     int result = Compare(node.value, value);                    
-                    if (node.next == null && (result < 0 || result == 0))
+                    if (node == null || (node.next == null && (result == 0 || result < 0)))
                     { 
                         AddInTail(_value); 
                         break; 
                     }
-                    else if (node.next != null && node.prev != null && 
+                    else if (node.next != null && node.prev != null &&
                         (result == 0 || (result<0 && Compare(node.next.value, value) > 0))) 
                     {
                         _value.next = node.next;
@@ -90,11 +90,9 @@ namespace AlgorithmsDataStructures
                     {
                         _value.next = node.next;
                         _value.prev = node;
+                        node.next.prev = _value;
                         node.next = _value;
-                        node = _value;
-                        node.next = _value.next;
-                        node.prev = _value.prev;
-                        break;
+                        break;                       
                     }
                     else if ((node.next != null && node.prev == null && result > 0) ||
                         (node.next == null && node.prev == null && result > 0))
@@ -239,7 +237,18 @@ namespace AlgorithmsDataStructures
             }
             return r;
         }
+        public List<Node<T>> GetAllTail()
 
+        {
+            List<Node<T>> r = new List<Node<T>>();
+            Node<T> node = tail;
+            while (node != null)
+            {
+                r.Add(node);
+                node = node.prev;
+            }
+            return r;
+        }
         public void AddInTail(Node<T> _item)
         {
             if (head == null)
@@ -255,6 +264,8 @@ namespace AlgorithmsDataStructures
             }
             tail = _item;
         }
+
+       
         
     }
 
