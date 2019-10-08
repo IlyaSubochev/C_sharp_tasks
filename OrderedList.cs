@@ -174,34 +174,38 @@ namespace AlgorithmsDataStructures
 
         public void Delete(T val)
         {
-            Node<T> node = Find(val);
-            if (node != null)
+            int tempCount = Count();
+            if (tempCount > 0)
             {
+                Node<T> node = Find(val);
+                if (node != null)
+                {
 
-                if (Count() == 1)
-                    Clear(_ascending);
-                else if (node.prev == null)
-                {
-                    node = node.next;
-                    head = node;
-                    head.prev = null;
-                }
-                else if (node.next == null)
-                {
-                    if (Count() == 2)
-                        tail = head;
+                    if (tempCount == 1)
+                        Clear(_ascending);
+                    else if (node.prev == null)
+                    {
+                        node = node.next;
+                        head = node;
+                        head.prev = null;
+                    }
+                    else if (node.next == null)
+                    {
+                        if (tempCount == 2)
+                            tail = head;
+                        else
+                            tail = node.prev;
+                        tail.next = null;
+                    }
                     else
-                        tail = node.prev;
-                    tail.next = null;
-                }
-                else
-                {
-                    Node<T> temp = node.next;
-                    node.prev.next = temp;
-                    temp.prev = node.prev;
+                    {
+                        Node<T> temp = node.next;
+                        node.prev.next = temp;
+                        temp.prev = node.prev;
+
+                    }
 
                 }
-              
             }
         }
 
