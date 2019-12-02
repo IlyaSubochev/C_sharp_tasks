@@ -31,15 +31,29 @@ namespace AlgorithmsDataStructures
         public int SeekSlot(string value) // находит индекс пустого слота для значения, или -1
         {
             int index = HashFun(value);
+            int cicle = 0;
             if (slots[index] == null)
                 return index;
             else
             {
-                while (slots[index] != null)
-                {
-                        index = +step;
+                while (slots[index] != null && cicle < size)
+                {                        
+                        index = index + step;
+                    if (index == size)
+                    {
+                        index = 0;
+                        cicle++;
+                    }
+                    else if (index > size)
+                    {
+                        index = index - size + 1;
+                        cicle++;
+                    }
                 }
-                return index;
+                if (cicle > size)
+                    return -1;
+                else
+                    return index;
             }
         }
 
@@ -61,17 +75,30 @@ namespace AlgorithmsDataStructures
 
         public int Find(string value) // находит индекс слота со значением, или -1
         {
+            int cicle = 0;
             int index = HashFun(value);
             if (slots[index] == null)
                 return -1;
             else
             {
-                while (slots[index] != null)
+                while (slots[index] != null && cicle < size)
                 {
                     if (slots[index] == value)
                         return index;
                     else
-                        index = +step;
+                    {
+                        index = index + step;
+                        if (index == size)
+                        {
+                            index = 0;
+                            cicle++;
+                        }
+                        else if (index > size)
+                        {
+                            index = index - size + 1;
+                            cicle++;
+                        }
+                    }
                 }
                 return -1;
             }
