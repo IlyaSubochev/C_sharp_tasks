@@ -9,6 +9,7 @@ namespace AlgorithmsDataStructures
         public int size;
         public int step;
         public string[] slots;
+        public int isTotal;
 
         public HashTable(int sz, int stp)
         {
@@ -16,6 +17,7 @@ namespace AlgorithmsDataStructures
             step = stp;
             slots = new string[size];
             for (int i = 0; i < size; i++) slots[i] = null;
+            isTotal = 0;
         }
 
         public int HashFun(string value) // всегда возвращает корректный индекс слота
@@ -30,30 +32,27 @@ namespace AlgorithmsDataStructures
 
         public int SeekSlot(string value) // находит индекс пустого слота для значения, или -1
         {
+            int total = isTotal / slots.Length;
             int index = HashFun(value);
-            int cicle = 0;
+            int stepSeek = step;
             if (slots[index] == null)
                 return index;
             else
             {
-                while (slots[index] != null && cicle < size)
+                while (total<1 && slots[index] != null)
                 {                        
-                        index = index + step;
-                    if (index == size)
+                        index = index + stepSeek;
+                    if (index >= size)
                     {
                         index = 0;
-                        cicle++;
+                        stepSeek = 1;
                     }
-                    else if (index > size)
-                    {
-                        index = index - size + 1;
-                        cicle++;
-                    }
+                    
                 }
-                if (cicle > size)
-                    return -1;
-                else
+                if (total < 1)
                     return index;
+                else
+                    return -1;
             }
         }
 
@@ -62,12 +61,14 @@ namespace AlgorithmsDataStructures
             // записываем значение по хэш-функции
             // возвращается индекс слота или -1
             // если из-за коллизий элемент не удаётся разместить 
+            int total = isTotal / slots.Length;
             int freeSlot = SeekSlot(value);
-            if (freeSlot == -1)
+            if (total==1 || freeSlot == -1)
                 return -1;
             else
             {
                 slots[freeSlot] = value;
+                isTotal += 1;
                 return freeSlot;
             }
                 
@@ -75,35 +76,23 @@ namespace AlgorithmsDataStructures
 
         public int Find(string value) // находит индекс слота со значением, или -1
         {
-            int cicle = 0;
             int index = HashFun(value);
             if (slots[index] == null)
                 return -1;
             else
             {
-                while (slots[index] != null && cicle < size)
+                index = 0;
+                while (index < size)
                 {
                     if (slots[index] == value)
                         return index;
                     else
                     {
-                        index = index + step;
-                        if (index == size)
-                        {
-                            index = 0;
-                            cicle++;
-                        }
-                        else if (index > size)
-                        {
-                            index = index - size + 1;
-                            cicle++;
-                        }
+                        index = index + 1;
                     }
                 }
                 return -1;
             }
-
-
 
         }
     }
