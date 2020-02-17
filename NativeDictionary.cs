@@ -21,19 +21,25 @@ namespace AlgorithmsDataStructures
         public bool IsKey(string key)// возвращает true если ключ имеется, иначе false
         {
             int index = HashFun(key);
-            
-            return false;
+            if (slots[index] == key)
+                return true;
+            else 
+                return false;
         }
         public void Put(string key, T value)  // гарантированно записываем значение value по ключу key
         {
             int index = HashFun(key);
+            slots[index] = key;
+            values[index] = value;
 
         }
         public T Get(string key) // возвращает value для key, или null если ключ не найден
         {
             int index = HashFun(key);
-
-            return default(T);
+            if (IsKey(key))
+                return values[index];
+            else
+                return default(T);
         }
     }
 }
