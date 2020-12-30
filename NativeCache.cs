@@ -23,15 +23,14 @@ namespace AlgorithmsDataStructures
 
         public int HashFun(string key)
         {
+            int hashcode = 0;
             if (key != null)
-            {
-                int hashcode = 0;
+            {               
                 char[] hashArray = key.ToCharArray();
                 for (int i = 0; i < hashArray.Length; i++)
-                    hashcode += Convert.ToInt32(hashArray[i]);
-                return hashcode % size;
+                    hashcode += Convert.ToInt32(hashArray[i]);               
             }
-            return 0;
+            return hashcode % size;
         }
 
         public bool IsKey(string key)
