@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-namespace AlgorithmsDataStructures
+
+namespace AlgorithmsDataStructures2
 {
     public class SimpleTreeNode<T>
     {
@@ -9,11 +10,11 @@ namespace AlgorithmsDataStructures
         public List<SimpleTreeNode<T>> Children; // список дочерних узлов или null
         public int layer;
         public SimpleTreeNode(T val, SimpleTreeNode<T> parent)
-            {
-                NodeValue = val;
-                Parent = parent;
-                Children = null;
-            }
+        {
+            NodeValue = val;
+            Parent = parent;
+            Children = null;
+        }
     }
     public class SimpleTree<T>
     {
@@ -31,7 +32,7 @@ namespace AlgorithmsDataStructures
             }
             else
             {
-                if (ParentNode.Children == null) 
+                if (ParentNode.Children == null)
                     ParentNode.Children = new List<SimpleTreeNode<T>>();
                 ParentNode.Children.Add(NewChild);
                 NewChild.Parent = ParentNode;
@@ -40,9 +41,9 @@ namespace AlgorithmsDataStructures
         }
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)  //  код удаления существующего узла NodeToDelete
         {
-            if (NodeToDelete.Parent == null) 
+            if (NodeToDelete.Parent == null)
                 Root = null;
-            else if (NodeToDelete.Parent.Children.Count == 1) 
+            else if (NodeToDelete.Parent.Children.Count == 1)
                 NodeToDelete.Parent.Children = null;
             else NodeToDelete.Parent.Children.Remove(NodeToDelete);
         }
@@ -63,7 +64,7 @@ namespace AlgorithmsDataStructures
             if (node.Children != null)
                 foreach (SimpleTreeNode<T> child in node.Children)
                     list = AllNodes(list, child);
-            if (list.Count > 0) 
+            if (list.Count > 0)
                 return list;
             return null;
         }
@@ -80,7 +81,7 @@ namespace AlgorithmsDataStructures
 
         private List<SimpleTreeNode<T>> NodesByValue(List<SimpleTreeNode<T>> list, SimpleTreeNode<T> node, T val)
         {
-            if (node.NodeValue != null && node.NodeValue.Equals(val)) 
+            if (node.NodeValue != null && node.NodeValue.Equals(val))
                 list.Add(node);
             if (node.Children != null)
                 foreach (SimpleTreeNode<T> child in node.Children)
@@ -101,13 +102,13 @@ namespace AlgorithmsDataStructures
             return 0;
         }
 
-        private int Count2(List<SimpleTreeNode<T>> list) 
+        private int Count2(List<SimpleTreeNode<T>> list)
         {
             if (list != null)
             {
                 int count = list.Count;
                 foreach (SimpleTreeNode<T> node in list)
-                    if (node.Children != null) 
+                    if (node.Children != null)
                         count += Count2(node.Children);
                 return count;
             }
@@ -120,7 +121,7 @@ namespace AlgorithmsDataStructures
                 return LeafCount2(Root.Children);
             return 0;
         }
-        private int LeafCount2(List<SimpleTreeNode<T>> list) 
+        private int LeafCount2(List<SimpleTreeNode<T>> list)
         {
             if (list != null)
             {
@@ -137,7 +138,7 @@ namespace AlgorithmsDataStructures
             if (Root != null)
             {
                 Root.layer = 1;
-                if (Root.Children != null) 
+                if (Root.Children != null)
                     WriteNextLayer(Root);
             }
         }
