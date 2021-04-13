@@ -58,11 +58,12 @@ namespace SortSpace
         #region 2. Сортировка вставками
 
         // вызов InsertionSortStep( [1,6,5,4,3,2,7], 3, 1 ) изменит входной массив на [1,3,5,4,6,2,7]
-         public static void InsertionSortStep(int[] array, int t, int i)
+                public static void InsertionSortStep(int[] array, int t, int i)
         {
             if (t <= 0)
                 return;
-            InsertionSortCycle(array, t, i);
+            if (!InsertionSortCycle(array, t, i))
+                InsertionSortStep(array, t, i);
         }
 
         public static bool InsertionSortCycle(int[] array, int t, int i)
@@ -70,9 +71,10 @@ namespace SortSpace
             if (i + t >= array.Length) 
                 return true;
             if (Compare(array[i], array[i + t]) && SwapElements(array, i, i + t))
-                return true; 
-            return true;
+                return InsertionSortCycle(array, t, i + t) && false;
+            return  InsertionSortCycle(array, t, i + t);
         }
+        
         #endregion
 
         #region 3. Сортировка Шелла
