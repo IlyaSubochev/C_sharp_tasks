@@ -79,6 +79,32 @@ namespace SortSpace
 
         #region 3. Сортировка Шелла
 
+        public static List<int> KnuthSequence(int array_size) // Создает лист числовых значений в порядке убывания последовательностью Кнута
+        {
+            List<int> list = new List<int>();
+            int t = KnuthNextStep(1, array_size);
+            for (; t >= 1; t = KnuthPrestep(t))
+                list.Add(t);
+            return list;
+        }
+
+        public static int KnuthNextStep(int t, int s) // Вычисляет максимальный размер шага для массива s, в соответствии с последовательностью Кнута
+        {
+            if (KnuthStep(t) > s) 
+                return t;
+            t = KnuthStep(t);
+            return KnuthNextStep(t, s);
+        }
+
+        public static int KnuthStep(int t)
+        {
+            return 3 * t + 1;
+        }
+
+        public static int KnuthPrestep(int t)
+        {
+            return (t - 1) / 3;
+        }
         #endregion
     }
 }
