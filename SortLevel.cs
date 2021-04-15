@@ -106,5 +106,78 @@ namespace SortSpace
             return (t - 1) / 3;
         }
         #endregion
+            
+        #region 4. Алгоритм разбиения массива
+
+        public static int ArrayChunk(int[] M)
+        {
+            return ArrayChunkStep1(M, 0, M.Length - 1);
+        }
+
+        public static int ArrayChunkStep1(int[] M, int i1, int i2) // Алгоритм разбиения шаг 1
+        {
+            while (true)
+            {
+                int n = ArrayChunkStep2(M, M[(i1 + i2 + 1) / 2], (i1 + i2 + 1) / 2, i1, i2);
+                if (n > -1) 
+                    return n;
+            }
+        }
+
+        public static int ArrayChunkStep2(int[] M, int N, int n, int i1, int i2) // Алгоритм разбиения шаг 2
+        {
+            if (IsDiff(i1, i2) && IsBigger(M[i1], M[i2]) && SwapElements(M, i1, i2))
+                return -1;
+
+            if (IsEqual(i1, i2) || (IsDiff(i1, i2) && IsLess(M[i1], M[i2])))
+                return n;
+
+            while (M[i1] < N || M[i2] > N)
+            {
+                if (M[i1] < N) 
+                    i1++;
+                if (M[i2] > N) 
+                    i2--;
+            }
+
+            if (!IsDiff(i1, i2))
+            {
+                SwapElements(M, i1, i2);
+                n = UpdateIndex(n, i1, i2);
+            }
+            return ArrayChunkStep2(M, N, n, i1, i2);
+        }
+
+        public static bool IsLess(int i, int n) // true Если значение меньше другого
+        {
+            return i < n;
+        }
+
+        public static bool IsBigger(int i, int n) // true Если значение больше другого
+        {
+            return i > n;
+        }
+
+        
+        public static bool IsDiff(int a, int b) // true если у значений разница в 1
+        {
+            return a == b - 1;
+        }
+
+        public static bool IsEqual(int a, int b) // true если значения равны
+        {
+            return a == b;
+        }
+
+        public static int UpdateIndex(int n, int i1, int i2)
+        {
+            if (i1 == n) 
+                return i2;
+            else if (i2 == n) 
+                return i1;
+            else 
+                return n;
+        }
+        #endregion
     }
 }
