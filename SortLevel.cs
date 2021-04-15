@@ -179,5 +179,20 @@ namespace SortSpace
                 return n;
         }
         #endregion
+            
+        #region 5. Быстрая сортировка Хоара
+
+        public static void QuickSort(int[] array, int left, int right) // Алгоритм быстрой сортировки массива
+        {
+            if (left == right) 
+                return;
+            int n = ArrayChunkStep1(array, left, right);
+            if (!(n <= left)) 
+                QuickSort(array, left, n - 1);
+            if (!(n >= right)) 
+                QuickSort(array, n + 1, right);
+        }
+
+        #endregion
     }
 }
