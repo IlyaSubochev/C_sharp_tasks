@@ -194,5 +194,43 @@ namespace SortSpace
         }
 
         #endregion
+            
+        #region 6. Элиминация хвостовой рекурсии
+
+        public static void QuickSortTailOptimization(int[] array, int left, int right) 
+        {
+            if (left == right) 
+                return;
+            int n = ArrayChunkStep1(array, left, right);
+            int i1, i2;
+            if (right - n < n - left) 
+            { 
+                i1 = n; 
+                i2 = right; 
+                right = n - 1; 
+            }
+            else 
+            { 
+                i1 = left; 
+                i2 = n; 
+                left = n + 1; 
+            }
+            int temp_left = i1;
+            while (!(i1 >= i2))
+            {
+                if (array[i1] > array[i2]) 
+                    SwapElements(array, i1, i2);
+                i1++;
+                if (i1 == i2)
+                {
+                    i1 = temp_left;
+                    i2--;
+                }
+            }
+
+            QuickSortTailOptimization(array, left, right);
+        }
+
+        #endregion            
     }
 }
