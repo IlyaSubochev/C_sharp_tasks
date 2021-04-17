@@ -201,36 +201,20 @@ namespace SortSpace
         {
             if (left == right) 
                 return;
-            int n = ArrayChunkStep1(array, left, right);
-            int i1, i2;
-            if (right - n < n - left) 
-            { 
-                i1 = n; 
-                i2 = right; 
-                right = n - 1; 
-            }
-            else 
-            { 
-                i1 = left; 
-                i2 = n; 
-                left = n + 1; 
-            }
-            int temp_left = i1;
-            while (!(i1 >= i2))
-            {
-                if (array[i1] > array[i2]) 
-                    SwapElements(array, i1, i2);
-                i1++;
-                if (i1 == i2)
-                {
-                    i1 = temp_left;
-                    i2--;
-                }
-            }
+            
+            int i1 = left; 
+            int i2 = right;
 
-            QuickSortTailOptimization(array, left, right);
+            if (left < right)
+            {
+                int n = ArrayChunkStep1(array, i1, i2);
+                if (left < i2)
+                    QuickSortTailOptimization(array, i1, n-1);
+                if (right > i1)
+                    QuickSortTailOptimization(array, n + 1, i2);
+            }           
         }
 
-        #endregion            
+        #endregion
     }
 }
