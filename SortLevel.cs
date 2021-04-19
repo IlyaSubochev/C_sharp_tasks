@@ -216,5 +216,32 @@ namespace SortSpace
         }
 
         #endregion
+
+        #region 7. Поиск порядковых статистик
+
+        public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
+        {
+            int order = ArrayChunkStep1(array, L, R);
+            List<int> list = new List<int>();
+            if (order == k)
+            {
+                list.Add(order);
+                list.Add(k);
+            }
+            else if (order < k)
+            {
+                list.Add(order + 1);
+                list.Add(R);
+            }
+            else
+            {
+                list.Add(L);
+                list.Add(order - 1);
+            }
+            return list;
+        }
+
+        #endregion            
+           
     }
 }
