@@ -246,8 +246,9 @@ namespace SortSpace
         #region 8. Сортировка слиянием(Merge-Sort)
             
         public static List<int> MergeSort(List<int> list)
-        {
-            if (list.Count == 1) return list;
+        {   
+            if (list.Count <= 1) 
+                return list;
 
             List<int> listA = new List<int>();
             List<int> listB = new List<int>();
