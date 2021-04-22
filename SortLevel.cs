@@ -242,6 +242,60 @@ namespace SortSpace
         }
 
         #endregion            
-           
+        
+        #region 8. Сортировка слиянием(Merge-Sort)
+            
+        public static List<int> MergeSort(List<int> list)
+        {
+            if (list.Count == 1) return list;
+
+            List<int> listA = new List<int>();
+            List<int> listB = new List<int>();
+            for (int i = 0; i < (list.Count + 1) / 2; i++) 
+                listA.Add(list[i]);
+            for (int i = (list.Count + 1) / 2; i < list.Count; i++) 
+                listB.Add(list[i]);
+
+            List<int> list1 = MergeSort(listA);
+            List<int> list2 = MergeSort(listB);
+            return MergeArray(list1, list2);
+        }
+
+        public static List<int> MergeArray(List<int> list1, List<int> list2)
+        {
+            List<int> result = new List<int>();
+
+            while (true)
+            {
+                if (list1.Count == 0 && list2.Count != 0)
+                {
+                    foreach (int num in list2) 
+                        result.Add(num);
+                    break;
+                }
+                else if (list1.Count != 0 && list2.Count == 0)
+                {
+                    foreach (int num in list1) 
+                        result.Add(num);
+                    break;
+                }
+                else if (list1.Count == 0 && list2.Count == 0) 
+                    break;
+
+                if (list1[0] >= list2[0])
+                {
+                    result.Add(list2[0]);
+                    list2.Remove(list2[0]);
+                }
+                else
+                {
+                    result.Add(list1[0]);
+                    list1.Remove(list1[0]);
+                }
+            }
+            return result;
+        }
+
+        #endregion           
     }
 }
