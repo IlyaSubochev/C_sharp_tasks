@@ -297,7 +297,38 @@ namespace SortSpace
             return result;
         }
 
-        #endregion           
+        #endregion
+            
+        #region 12. Бинарный поиск "От края"
+
+        public static bool GallopingSearch(int[] array, int N)
+        {
+            if (N < array[0] || N > array[array.Length - 1]) 
+                return false;
+            BinarySearch BS = new BinarySearch(array);
+            for (int i = 1; i <= array.Length - 1; i++)
+            {
+                int index = (int)(Math.Pow(2, i) - 2);
+                if (index > array.Length - 1) 
+                    index = array.Length - 1;
+                if (array[index] == N) 
+                    return true;
+                if (array[index] < N) 
+                    continue;
+                else if (array[index] > N)
+                {
+                    BS.Left = (int)(Math.Pow(2, i - 1) - 2) + 1;
+                    BS.Right = index;
+                }
+                break;
+            }
+
+            while (BS.GetResult() == 0) 
+                BS.Step(N);
+            return BS.GetResult() == 1;
+        }
+        #endregion
+            
     }
     
     #region 11. Двоичный поиск
