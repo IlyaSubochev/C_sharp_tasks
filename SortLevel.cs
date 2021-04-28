@@ -299,4 +299,53 @@ namespace SortSpace
 
         #endregion           
     }
+    
+    #region 11. Двоичный поиск
+
+    public class BinarySearch
+    {
+        public int Left;
+        public int Right;
+        private int result;
+        private int[] array;
+
+        public BinarySearch(int[] array)
+        {
+            Left = 0;
+            Right = array.Length - 1;
+            result = 0;
+            this.array = array;
+        }
+        public void Step(int N)
+        {
+            if (result == 0)
+            {
+                int middle = (Right + Left) / 2;
+
+                if (N != array[middle])
+                {
+                    if (N < array[middle])
+                        Right = middle - 1;
+                    else 
+                        Left = middle + 1;
+                    if (Left == Right)
+                    {
+                        if (N == array[Left]) 
+                            result = 1;
+                        else 
+                            result = -1;
+                    }
+                    else if ((Right - Left) == 1 && !(N == array[Left] || N == array[Right])) 
+                        result = -1;
+                }
+                else result = 1;
+            }
+        }
+        public int GetResult()
+        {
+            return result;
+        }       
+    }
+    #endregion
+
 }
